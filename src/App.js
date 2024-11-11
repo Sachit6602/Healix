@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import HeroSection from './components/HeroSection';
+import ProductsSection from './components/ProductsSection';
+import ProductPage from './components/ProductPage';
+import LandingPage from './components/LandingPage';
+import Mint from './assets/mint.png'
+import Euc from './assets/euc.png'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const sampleProducts = [
+  { id: '1', name: 'Healix Mint', price: '₹ 1999', description: 'Minty fresh', image: Mint},
+  { id: '2', name: 'Healix Eucalyptus', price: '₹ 1999', description: 'Smooth vanilla', image: Euc},
+  // more sample products
+];
+
+const App = () => (
+  <Router>
+    <Header />
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <>
+            <LandingPage />
+            <HeroSection />
+
+            <ProductsSection products={sampleProducts} />
+          </>
+        }
+      />
+      <Route path="/products/:productId" element={<ProductPage products={sampleProducts} />} />
+    </Routes>
+  </Router>
+);
 
 export default App;
