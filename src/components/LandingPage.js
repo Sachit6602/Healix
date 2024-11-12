@@ -1,8 +1,8 @@
 // src/components/LandingPage.js
-import React from 'react';
+import React, { useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Sphere, Box, Environment } from '@react-three/drei';
-import { motion } from 'framer-motion';
+import { OrbitControls, Environment, useGLTF } from '@react-three/drei';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import styled from 'styled-components';
 
 const LandingContainer = styled.div`
@@ -24,24 +24,26 @@ const HeroText = styled(motion.h1)`
   color: #ffffff;
 `;
 
-const SubText = styled(motion.p)`
-  position: absolute;
-  top: 30%;
-  font-size: 1.25rem;
-  color: #ffffff;
-  max-width: 600px;
-  text-align: center;
-`;
-
 const CanvasContainer = styled.div`
-  width: 100%;
+  width: 100%;W
   height: 100vh;
 `;
 
+const HealixModel = () => {
+  const model = useGLTF('/vape_pen.glb'); // Adjust path if needed
+  return <primitive object={model.scene} />;
+};
+
 const LandingPage = () => {
+  const scrollRef = useRef(null);
+  const { scrollYProgress } = useScroll({ container: scrollRef });
+
+  // Use useTransform to create scale and rotation based on scrollYProgress
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 2]);
+  const rotation = useTransform(scrollYProgress, [0, 1], [0, Math.PI]);
+
   return (
-    <LandingContainer>
-      {/* Hero Text and Subtext */}
+    <LandingContainer ref={scrollRef}>
       <HeroText
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -49,32 +51,18 @@ const LandingPage = () => {
       >
         Welcome to Healix
       </HeroText>
-      <SubText
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, delay: 0.5 }}
-      >
-        A Healthier Path to Quitting Smoking
-      </SubText>
 
-      {/* Canvas for 3D Objects */}
       <CanvasContainer>
         <Canvas camera={{ position: [0, 0, 5] }}>
           <ambientLight intensity={0.3} />
           <directionalLight position={[5, 5, 5]} intensity={1} />
 
-          {/* 3D Objects */}
-          <Sphere args={[1, 32, 32]} position={[-2, 0, 0]} scale={1.5}>
-            <meshStandardMaterial color="#E94560" metalness={0.5} roughness={0.1} />
-          </Sphere>
-          <Box args={[1, 1, 1]} position={[2, 0, 0]} scale={1.2}>
-            <meshStandardMaterial color="#3B82F6" metalness={0.3} roughness={0.2} />
-          </Box>
+          {/* Animated 3D Model */}
+          <motion.group scale={scale} rotation={[rotation, 0, 0]}>
+            <HealixModel />
+          </motion.group>
 
-          {/* Orbit Controls */}
           <OrbitControls enableZoom={false} />
-          
-          {/* Environment (optional, adds depth) */}
           <Environment preset="sunset" />
         </Canvas>
       </CanvasContainer>
