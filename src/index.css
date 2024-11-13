@@ -15,3 +15,12 @@ code {
 html {
   scroll-behavior: smooth;
 }
+
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('./assets/fonts/geo.otf') format('truetype');
+}
+
+body {
+  font-family: 'MyCustomFont', sans-serif;
+}
