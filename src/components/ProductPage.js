@@ -8,6 +8,8 @@ const ProductDetailContainer = styled.section`
   padding: 50px 20px;
   display: flex;
   gap: 20px;
+  background-color: #222; /* Dark background */
+  color: #ffffff; /* Light text */
 `;
 
 const ProductImage = styled(motion.img)`

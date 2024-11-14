@@ -7,23 +7,23 @@ import styled from 'styled-components';
 
 const LandingContainer = styled.div`
   width: 100%;
-  height: 200vh; /* Increased height for scroll */
+  height: 250vh; /* Increased height for scroll */
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: #000000; /* Background changed to black */
 `;
 
 const Title = styled(motion.h1)`
   position: absolute;
   top: 10%;
-  left: 18%;
+  left: 50%;
   transform: translateX(-50%);
   font-size: 12rem;
   font-weight: 700;
-  color: #000000;
+  color: #ffffff; /* Text color changed to white */
   font-family: 'MyCustomFontt', sans-serif;
 `;
 
@@ -33,7 +33,7 @@ const TitleLeft = styled(motion.div)`
   top: 50%;
   font-size: 3rem;
   font-weight: 700;
-  color: #000000;
+  color: #ffffff; /* Text color changed to white */
   text-align: left;
   text-transform: uppercase;
   line-height: 1.2;
@@ -46,7 +46,7 @@ const TitleRight = styled(motion.div)`
   top: 50%;
   font-size: 3rem;
   font-weight: 700;
-  color: #000000;
+  color: #ffffff; /* Text color changed to white */
   text-align: right;
   text-transform: uppercase;
   line-height: 1.2;
@@ -60,14 +60,13 @@ const CanvasContainer = styled.div`
 
 const VapePen = ({ rotation }) => {
   const { scene } = useGLTF('/vape_pen.glb');
-  return <primitive object={scene} rotation={rotation} scale={0.8} position={[0, 1.5, 0]} />;
+  return <primitive object={scene} rotation={rotation} scale={0.6} position={[0, 2, 0]} />;
 };
 
 const LandingPage = () => {
   const scrollRef = useRef(null);
   const { scrollY } = useScroll();
 
-  // Animation values for titles based on scroll position
   const titleOpacity = useTransform(scrollY, [0, 300], [1, 0]); // Healix fades out
   const titleScale = useTransform(scrollY, [0, 300], [1, 1.5]); // Zoom in Healix
   const leftTitleOpacity = useTransform(scrollY, [200, 400], [0, 1]); // Left title fades in
@@ -91,15 +90,13 @@ const LandingPage = () => {
 
       {/* 3D Model Canvas */}
       <CanvasContainer>
-        <Canvas camera={{ position: [0, 0, 10] }}>
-          <ambientLight intensity={0.6} />
-          <directionalLight position={[5, 5, 5]} intensity={1.2} />
+        <Canvas camera={{ position: [0, 0, 15] }}> {/* Move camera further back */}
+          <ambientLight intensity={0.8} />
+          <directionalLight position={[5, 5, 5]} intensity={1.5} />
           
-          {/* Vape Pen Model positioned higher on the screen */}
+          {/* Vape Pen Model positioned higher and scaled up */}
           <Suspense fallback={null}>
-            <motion.group rotation={[0, modelRotation, 0]}>
-              <VapePen />
-            </motion.group>
+            <VapePen />
           </Suspense>
           
           <OrbitControls enableZoom={false} />

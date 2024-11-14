@@ -9,15 +9,15 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: #fff;
+  background: #fffff; /* Dark background */
   position: fixed;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
 `;
 
 const Logo = styled.img`
-  width: 120px;  // Adjust size as needed
+  width: 120px;
   height: auto;
 `;
 
@@ -26,7 +26,7 @@ const NavLinks = styled.nav`
   gap: 20px;
   a {
     text-decoration: none;
-    color: #333;
+    color: #ffffff; /* Light text */
     font-weight: bold;
   }
 `;
@@ -34,6 +34,7 @@ const NavLinks = styled.nav`
 const CartIcon = styled.div`
   cursor: pointer;
   font-size: 1.5rem;
+  color: #ffffff; /* Light icon */
 `;
 
 const Header = () => (

@@ -8,14 +8,16 @@ const ProductsContainer = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
+  background-color: black; /* Dark background */
 `;
 
 const ProductCard = styled(motion.div)`
-  background: #f9f9f9;
+  background: green; /* Slightly lighter dark background */
   padding: 20px;
   text-align: center;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: black;
+  color: #ffffff; /* Light text */
 `;
 
 const ProductsSection = ({ products }) => (
