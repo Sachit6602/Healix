@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png'; // Adjust path if necessary
+import logo from '../assets/lg2.png'; // Adjust path if necessary
 
 const HeaderContainer = styled.header`
   display: flex;
