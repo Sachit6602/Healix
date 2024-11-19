@@ -215,6 +215,6 @@ const LandingPage = () => {
       </Arrows>
     </LandingContainer>
   );
-};
+}; 
 
 export default LandingPage;
