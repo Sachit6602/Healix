@@ -24,7 +24,7 @@ const App = () => (
         element={
           <>
             <LandingPage />
-            <HeroSection />
+            <HeroSection /> 
 
             <ProductsSection products={sampleProducts} />
           </>
