@@ -66,7 +66,7 @@ export const EssentialOils = ({ onClick }) => {
         distort={0.2}
         speed={1.5}
         roughness={0}
-      />
+      /> 
     </mesh>
   );
 };
